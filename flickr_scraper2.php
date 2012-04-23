@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?> 
+<html>
+
   <?php
   
  # $tag=$_GET['tags'];
-$feed = file_get_contents("http://api.flickr.com/services/feeds/photos_public.gne");
+$feed = file_get_contents("http://localhost/FlickrScraper/xml.gne");
 
 ?>
+
 
 <p id='feed' > </p>
 <script type="text/javascript">
   var feed = unescape(' <?php echo rawurlencode($feed); ?> ');
   
   parser =new DOMParser();
-  xmlDoc=parser.parseFromString(feed, "text/xml");
+  content=parser.parseFromString(feed, "text/xml"); 
+  txt=content.getElementsByTagName("entry")[0].childNodes[0].nodeValue;
+  document.write(txt);
     
-    
-  document.getElementById('feed').innerHTML=xmlDoc;
-
+  document.write("XML string is loaded into an xml dom object");
 
 </script>
 
-
+</html>
 
 
 
