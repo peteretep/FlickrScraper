@@ -8,7 +8,7 @@
 
 <p id='feed' > </p>
 <script type="text/javascript">
-  var feed = "http://localhost/FlickrScraper/xml.gne"
+  var feed = "http://spiritadventure.net/xml.gne"
 
   var xmlhttp;
   var entry, i, title, content;
