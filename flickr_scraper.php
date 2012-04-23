@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Flickr Image Scraper by DCU
+<title>Flickr Image Scraper by Peter Armstrong For Mark Humphrys, DCU </title>
 </head>
 <body>
   <! -- This is the HTML form / Search box -->
