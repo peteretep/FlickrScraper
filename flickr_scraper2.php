@@ -1,15 +1,15 @@
   <?php
   
  # $tag=$_GET['tags'];
-#$feed = file_get_contents("http://api.flickr.com/services/feeds/photos_public.gne?tags= . $tag");
+$feed = file_get_contents("http://api.flickr.com/services/feeds/photos_public.gne");
 
-#echo $feed;
+echo $feed;
 ?>
 
 <p id='feed' > </p>
 <script type="text/javascript">
-  var feed = "http://localhost/FlickrScraper/xml.gne"
-
+  var feed = unescape(' <?php echo rawurlencode($feed); ?> ');
+  alert (feed);
   var xmlhttp;
   var entry, i, title, content;
   var txt ="";
