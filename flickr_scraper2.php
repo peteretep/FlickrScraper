@@ -2,8 +2,10 @@
 
   <?php
   
- # $tag=$_GET['tags'];
-$feed = file_get_contents("http://localhost/shoutbox/xml.gne");
+$tag=$_GET['tags'];
+
+$feed1 = file_get_contents("http://api.flickr.com/services/feeds/photos_public.gne?tags={$tag}");
+$feed = str_replace("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" , "", $feed1);
 
 ?>
 
@@ -11,7 +13,8 @@ $feed = file_get_contents("http://localhost/shoutbox/xml.gne");
 <p id='feed' > </p>
 <script type="text/javascript">
   var feed = unescape(' <?php echo rawurlencode($feed); ?> ');
-
+  
+  //document.write(feed);
   var txt="";
   parser =new DOMParser();
   xmlDoc=parser.parseFromString(feed, "text/xml"); 
@@ -24,7 +27,7 @@ $feed = file_get_contents("http://localhost/shoutbox/xml.gne");
   
   document.write(txt);
     
-  document.write("XML string is loaded into an xml dom object");
+  
 
 </script>
 
