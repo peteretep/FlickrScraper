@@ -1,39 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?> 
   <?php
   
  # $tag=$_GET['tags'];
 $feed = file_get_contents("http://api.flickr.com/services/feeds/photos_public.gne");
 
-echo $feed;
 ?>
 
 <p id='feed' > </p>
 <script type="text/javascript">
   var feed = unescape(' <?php echo rawurlencode($feed); ?> ');
-  alert (feed);
-  var xmlhttp;
-  var entry, i, title, content;
-  var txt ="";
-  try 
-  {
-    xmlhttp=new XMLHttpRequest();
-    xmlhttp.open("GET", feed, false);
-    xmlhttp.send();  
-  }
-  catch (er)
-  {
-    alert ("error");  
-  }
-  xmlDoc=xmlhttp.responseXML
-  entry=xmlhttp.responseXML.documentElement.getElementsByTagName("entry");
-  var randomnumber=Math.floor(Math.random()*(entry.length+1));
+  
+  parser =new DOMParser();
+  xmlDoc=parser.parseFromString(feed, "text/xml");
+    
+    
+  document.getElementById('feed').innerHTML=xmlDoc;
 
-  content= entry[randomnumber].getElementsByTagName("content");
-  txt=txt+content[0].firstChild.nodeValue +"</br>"
-
-
-
-
-  document.getElementById('feed').innerHTML=txt;
 
 </script>
 
