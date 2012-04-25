@@ -1,3 +1,6 @@
+<!--Flickr Image Scraper by Peter Armstrong For Mark Humphrys, DCU CA651 -->
+
+<!DOCTYPE html>
 <html>
 <head>
 <title>Flickr Image Scraper by Peter Armstrong For Mark Humphrys, DCU </title>
@@ -5,7 +8,7 @@
 <body>
   <! -- This is the HTML form / Search box -->
   Enter A Tag To Search For Photos
-  <form name="tagbox" action="?" method="get" target="_self" >
+  <form name="tagbox" action="" method="get" target="_self" >
     <input type="text" id="tags" name="tags"/>
     <input type="submit" value="Submit"/>
   
@@ -14,17 +17,16 @@
   <!-- The PHP connects to the flickr feed. -->  
   <?php
 
-  if (isset($_Get['tags']))
-  {  
-    #checks if tag is being searched for, if so adds it to the variable
+
+    
+    # if tag is being searched for, adds it to the variable
     $tag=$_GET['tags'];
-  }
+  
   # Gets the content of the feed and adds it to the variable
   $feed1 = file_get_contents("http://api.flickr.com/services/feeds/photos_public.gne?tags={$tag}");
 
   #This line removes the doctype heading from the string variable
   $feed = str_replace("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" , "", $feed1);
-
   ?>
 
 
