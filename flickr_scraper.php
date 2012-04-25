@@ -1,11 +1,18 @@
 <!--Flickr Image Scraper by Peter Armstrong For Mark Humphrys, DCU CA651 -->
-
+<!-- Widget connects to Flickr feed using PHP, parses the feed using AJAX, 
+			Ranodmly selects one image from the feed to display
+			On mouseovering the image, the Flickr user who uploaded the image is displayed -->
 <!DOCTYPE html>
 <html>
 <head>
 <title>Flickr Image Scraper by Peter Armstrong For Mark Humphrys, DCU </title>
+
+
+
 </head>
 <body>
+
+<div id='container' style='width:240px;'>
   <! -- This is the HTML form / Search box -->
   Enter A Tag To Search For Photos
   <form name="tagbox" action="" method="get" target="_self" >
@@ -14,7 +21,7 @@
   
   </form>
   
-  <!-- The PHP connects to the flickr feed. -->  
+<!-- The PHP connects to the flickr feed. -->  
   <?php
 
 
@@ -27,7 +34,19 @@
 
   #This line removes the doctype heading from the string variable
   $feed = str_replace("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" , "", $feed1);
-  ?>
+  ?>  
+
+
+
+	<div id='photo' onmouseover="document.getElementById('user').style.display='block'" onmouseout="document.getElementById('user').style.display='none'">
+	photo
+
+	</div>
+	
+	<!-- hidden div, will display on mouseover of the photo div -->
+	<div id='user' style="margin-top:-30px; background-color:white; display:none; opacity:0.6;" onmouseover="document.getElementById('user').style.display='block'" onmouseout="document.getElementById('user').style.display='none'">
+	</div>
+</div>
 
 
   <script type="text/javascript">
@@ -47,11 +66,23 @@
     var content= entry[randomnumber].getElementsByTagName("content");
     
     photoContent=photoContent+content[0].firstChild.nodeValue +"</br>";
-    //writes the photoContent to the screen
-    document.write(photoContent);
-      
+    
+    //finds the bits between the img tag using pattern matching
+    var imgPattern="\<img.+\/\>";
+    var img = photoContent.match(imgPattern);
+    
+    //displays the img tag in the photo element
+    document.getElementById('photo').innerHTML=img;
+    
+    // finds the link to the user
+    var userPattern="\<a href=\"http://www.flickr.com/people/.*\"\>.*\<\/a\>";
+    var user=photoContent.match(userPattern);
+		// displays the link to the user in the hidden user div.
+		document.getElementById('user').innerHTML="Photo By: " + user;
+		
+		
+    
   </script>
-
 
   </body>
 </html> 
